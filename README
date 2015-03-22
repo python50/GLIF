@@ -1,9 +1,8 @@
 #What is GLIF?
 Currently GLIF is a Gerber writer written in python. It takes graphical primitives such as lines, arcs, circles, polygons, and ASCII text and writes out valid RS-274X "Gerber" files. These files are typically used to manufacture PCBs.
 
-#TODO
-* Add a Gerber import using the excellent "pcb-tools" project by curtacircuitos
-Their repository is located at https://github.com/curtacircuitos/pcb-tools
+#Features
+ * Working Gerber import and export (import needs work to add support for few more primitives such as Arcs)
 
 
 
