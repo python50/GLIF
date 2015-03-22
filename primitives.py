@@ -36,8 +36,9 @@ class line():
 	Arc
 """	
 class arc():
-	def __init__(self, x, y, radius, x_scale, y_scale, start_angle, end_angle, layer, component, thickness=None, clearance=None):
+	def __init__(self, x, y, radius, shape, x_scale, y_scale, start_angle, end_angle, layer, component, thickness=None, clearance=None):
 		self.location=coordinate(x, y)
+		self.shape=shape
 		self.angular_dimesions=angle_pair(start_angle, end_angle)
 		self.radius=radius
 		self.x_scale=x_scale
@@ -66,9 +67,8 @@ class polygon():
 	Circle
 """
 class circle():
-	def __init__(self, x, y, filled, layer, component, thickness=None, clearance=None):
+	def __init__(self, x, y, layer, component, thickness=None, clearance=None):
 		self.location=coordinate(x, y)
-		self.filled=filled
 		
 		self.layer=layer
 		self.component=component

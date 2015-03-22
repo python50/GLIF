@@ -1,0 +1,6 @@
+The Apache licence included in this direcoty applies to the files in the directory ./GLIF/pcb-tools
+
+These files are from curtacircuitos excellent project "pcb-tools"
+which can be found at https://github.com/curtacircuitos/pcb-tools
+
+We use their gerber parser to import gerbers into GLIF.

@@ -121,13 +121,12 @@ class gerber_writer:
 		
 		#One segment for every 0.1mm
 		segments=int(round(length*10)+1)
-		print "segments "+str(segments)
+
 		#compute delta per segment
 		delta/=float(segments)
 		
 		current_angle=float(start_angle)
 		for i in range(segments):
-			print current_angle
 			x1=x+round(x_scale*cos(radians(current_angle))*radius)
 			y1=y+round(y_scale*sin(radians(current_angle))*radius)
 			
@@ -136,10 +135,8 @@ class gerber_writer:
 			x2=x+round(x_scale*cos(radians(current_angle))*radius)
 			y2=y+round(y_scale*sin(radians(current_angle))*radius)
 			
-			print [(x1, y1), (x2, y2)]
 			
 			write_line(self.f, p.aperture, (x1, y1), (x2, y2))
-		print current_angle
 		
 			
 		
@@ -177,31 +174,31 @@ def test_gerber_writer():
 	writer=gerber_writer("export2.gbr")
 	
 	writer.primitives=[
-			arc( -2000000, 0, 500000, 1, 1, 270, 315, 0, "", thickness=0.1, clearance=None),
-			arc( -2000000, 0, 500000, 1, 1, 135, 225, 0, "", thickness=0.1, clearance=None),
-			arc( -2000000, 0, 500000, 1, 1, 0, 90, 0, "", thickness=0.1, clearance=None),
-			arc( -2000000, 1000000, 1000000, 0.5, 1, 0, 180, 0, "", thickness=0.1, clearance=None),
-			arc( -2000000, 1000000, 1000000, 0.3, 0.6, 0, 180, 0, "", thickness=0.1, clearance=None),
-			
-			arc( -2000000, 3500000, 1000000, 1, 0.75, 30, 330, 0, "", thickness=0.1, clearance=None),
-			arc( -2000000, 3500000, 1000000, 0.66, 0.5, 30, 330, 0, "", thickness=0.1, clearance=None),
-			line(1000000, 1000000, 2000000, 2000000, "C", 0, "copper", thickness=0.25, clearance=None),
+		arc( -2000000, 0, 500000, "C", 1, 1, 270, 315, 0, "", thickness=0.1, clearance=None),
+		arc( -2000000, 0, 500000, "C", 1, 1, 135, 225, 0, "", thickness=0.1, clearance=None),
+		arc( -2000000, 0, 500000, "C", 1, 1, 0, 90, 0, "", thickness=0.1, clearance=None),
+		arc( -2000000, 1000000, 1000000, "C" ,0.5, 1, 0, 180, 0, "", thickness=0.1, clearance=None),
+		arc( -2000000, 1000000, 1000000, "C", 0.3, 0.6, 0, 180, 0, "", thickness=0.1, clearance=None),
+		
+		arc( -2000000, 3500000, 1000000, "C", 1, 0.75, 30, 330, 0, "", thickness=0.1, clearance=None),
+		arc( -2000000, 3500000, 1000000, "C", 0.66, 0.5, 30, 330, 0, "", thickness=0.1, clearance=None),
+		line(1000000, 1000000, 2000000, 2000000, "C", 0, "copper", thickness=0.25, clearance=None),
 		line(1000000, 2000000, 2000000, 3000000, "R", 0, "copper", thickness=0.5, clearance=None),
 		line(1000000, 3500000, 2000000, 3500000, "C", 0, "copper", thickness=0.25, clearance=None),
-	
+
 		line(1000000, 4000000, 2000000, 4000000, "R", 0, "copper", thickness=0.25, clearance=None),
 		line(2500000, 1000000, 2500000, 1000000, "R", 0, "copper", thickness=1, clearance=None),
-	
-		circle(0000000, 0000000, 1, 0, "copper", thickness=0.5, clearance=None),
-		circle(0000000, 2000000, 1, 0, "copper", thickness=0.5, clearance=None),
-		circle(3500000, 3000000, 1, 0, "copper", thickness=1.25, clearance=None),
-	
-	
+
+		circle(0000000, 0000000, 0, "copper", thickness=0.5, clearance=None),
+		circle(0000000, 2000000, 0, "copper", thickness=0.5, clearance=None),
+		circle(3500000, 3000000, 0, "copper", thickness=1.25, clearance=None),
+
+
 		polygon(1000000, 0, 1, [(3000000,0),(4000000,0),(4000000,1500000),  (2500000,1500000), (3000000,1000000)], 0, "copper", thickness=0.0, clearance=None),
 		text(0, -1500000, "Hello", 1, 0, 0, "copper", thickness=0.075, clearance=None),
 		text(0, -3500000, "There!", 2, 0, 0, "copper", thickness=0.15, clearance=None),
 		text(6000000, -1000000, "Any Angle Text", 0.5, 45, 0, "copper", thickness=0.04, clearance=None)
-		]
+	]
 	
 	writer.write()
 		
