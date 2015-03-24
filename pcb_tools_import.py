@@ -87,6 +87,7 @@ print primitives
 g=gerber_writer.gerber_writer("pcb_tools_export.gbr")
 
 g.primitives+=primitives
+g.primitives+=[glif.text(0,-1*CORD_SCALE, "Imported into GLIF and modified!", 1, 22.5, 0, "", 0.1)]
 
 g.write()
 
