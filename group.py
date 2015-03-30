@@ -4,7 +4,7 @@
 	
 	Definition of Group and Coordiate classes
 """
-
+import copy
 
 #Note that all coordinates are to be stored in nanometers
 class vector:
@@ -28,6 +28,10 @@ class vector:
 
 #coordinate inherits from vector
 class coordinate(vector):
+	def __init__(self, x, y):
+		self.x=x
+		self.y=y
+		
 	def __repr__(self):
 		return """<coordinate, x=%d y=%d>""" % (self.x, self.y)
 
@@ -43,12 +47,13 @@ class design_rule:
 		self.clearance=clearance
 
 class group:
-	def __init__(self, x, y, layer, members):
-		self.members=members
+	def __init__(self, x, y, layer, members, angle=0, attributes={}):
+		#patch to fix multiple references to same object
+		self.members=copy.deepcopy(members)
 		self.location=coordinate(x, y)
 		self.layer=layer
-		self.angle=0
-		self.attributes={}
+		self.angle=angle
+		self.attributes=attributes
 		
 	"""
 		Normal member functions
@@ -86,7 +91,7 @@ class group:
 		return self.__repr__()
 	
 	def __repr__(self):
-		return """<group, %s, layer=%s, members=%s>""" % (self.location, str(self.layer), self.members)
+		return """<group %s, x=%d y=%d, layer=%s, members=%s>""" % (id(self),self.location.x, self.location.y, str(self.layer), self.members)
 		
 	def insert(self, i, value):
 		self.members.insert(i, value)

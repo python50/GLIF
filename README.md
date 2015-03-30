@@ -16,6 +16,6 @@ Gerber export
  2. (TODO) Groups are rotated and flattened into a list of primitives
  3. This is fed to `gerber_writer.py` which takes the five primitives (`line`, `arc`, `polygon`, `circle`, `text`) and writes them into a standard Gerber RS-274X file with the aid of `gerber_writer_core.py`
  
- Issues
- -----------------------
-  1. The units used inside of GLIF are closely tied to the units written out by `gerber_writer.py`. Support needs to be added to convert units on the fly.
+Issues
+-----------------------
+ 1. The units used inside of GLIF are closely tied to the units written out by `gerber_writer.py`. Support needs to be added to convert units on the fly.

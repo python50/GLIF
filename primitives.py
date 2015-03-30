@@ -31,7 +31,13 @@ class line():
 		self.layer=layer
 		self.component=component
 		self.design_rules=design_rule(thickness, clearance)
-
+	
+	def __repr__(self):
+		return self.__str__()
+	
+	def __str__(self):
+		return "<primitives.line x1=%d y1=%d x2=%d y2=%d>" % (self.start.x, self.start.y, self.end.x, self.end.y)
+		
 """
 	Arc
 """	
@@ -74,6 +80,11 @@ class circle():
 		self.component=component
 		self.design_rules=design_rule(thickness, clearance)
 	
+	def __repr__(self):
+		return self.__str__()
+	
+	def __str__(self):
+		return "<primitives.circle %s, x=%d y=%d>" % (id(self), self.location.x, self.location.y)
 """
 	Text
 """

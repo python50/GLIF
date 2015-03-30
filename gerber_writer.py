@@ -8,7 +8,8 @@
 # a high-ish level gerber RS274X writer
 # Takes in the 5 graphical primitives and
 # outputs a gerber file in MM mode
-# with positive polarity
+# with positive polarity (do not feed 
+# groups to the gerber writer please)
 #
 # Apertures are taken care of here.
 #
@@ -28,11 +29,11 @@ from primitives import *
 from gerber_writer_core import *
 
 class gerber_writer:
-	def __init__(self, filename):
+	def __init__(self, filename, primitives=[]):
 		self.filename=filename
 		self.f=open(filename, "w")
 		self.apertures=[]
-		self.primitives=[]
+		self.primitives=primitives
 	
 	def write(self):
 		write_start(self.f)
@@ -102,11 +103,11 @@ class gerber_writer:
 	def write_arc(self, p):
 		x=p.location.x
 		y=p.location.y
-		x_scale=self.limit_range(p.x_scale, 0, 1)
-		y_scale=self.limit_range(p.y_scale, 0, 1)
+		x_scale=abs(p.x_scale)#self.limit_range(p.x_scale, 0, 1)
+		y_scale=abs(p.y_scale)#self.limit_range(p.y_scale, 0, 1)
 		
-		start_angle=self.limit_range(p.angular_dimesions.x, 0 ,360)
-		end_angle=self.limit_range(p.angular_dimesions.y, 0, 360)
+		start_angle=p.angular_dimesions.x#self.limit_range(p.angular_dimesions.x, 0 ,360)
+		end_angle=p.angular_dimesions.y#self.limit_range(p.angular_dimesions.y, 0, 360)
 		
 		if start_angle>end_angle:
 			temp=start_angle
@@ -201,5 +202,3 @@ def test_gerber_writer():
 	]
 	
 	writer.write()
-		
-test_gerber_writer()

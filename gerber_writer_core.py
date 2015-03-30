@@ -150,5 +150,3 @@ def write_polygon(f, x, y, point_list):
 def write_end(f):	
 	# end of file
 	f.write("M02*\n")
-	
-test_gerber_writer_core()
