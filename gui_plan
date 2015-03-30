@@ -1,0 +1,78 @@
+-Planned-
+Interface to Gui
+
+	-> Basic primitives and layer handling (via groups.py and primitives.py)
+		- Objects for groups and basic primitives
+		- Design class containing primitives and design information
+		- Groups are determined after the fact, objects are not to be sorted initially
+	
+	-> Open Design (via default `importer` class)
+		- Supported formats list
+			- GLIF native format
+
+		- Open design function
+		
+	-> Save Design (via default `exporter` class)
+		- Supported formats list
+			- GLIF native format
+			
+		- Open file function
+		
+	-> Import (via `importer` base class)
+		- Supported formats list
+			- Gerber RS-274X
+			- gEDA Netlist file
+			- (contrib/optional) gEDA Schematic
+			- (contrib/optional) PCB format
+			- (contrib/optional) Others such as EagleXML and Kicad via contributed scripts.
+			
+		- Import design function
+	
+	-> Export (via `exporter` base class)
+		- Supported formats list
+			- Gerber RS-274X
+			- (optional) PCB format
+			- (optional) gEDA Netlist file
+			- (optional) Others such as EagleXML and Kicad via contributed scripts.
+			
+		- Export design function
+		
+Library support (via `library` base class)
+	- Read
+		- GLIF native format
+		- PCB footprint
+		- EagleXML library
+		
+	- Write
+		- GLIF native format
+		- PCB footprint (contrib/optional)
+		- EagleXML library (contrib/optional)
+	
+
+Class Hierarchy
+
+	importer	-> importer_glif
+			-> importer_rs274
+			-> importer_geda_net
+			-> importer_geda_pcb (contrib/optional)
+			-> importer_eagle_xml (contrib/optional)
+			-> importer_kicad (contrib/optional)
+	
+	exporter	-> exporter_glif
+			-> exporter_rs274
+			-> exporter_geda_net
+			-> exporter_geda_pcb (contrib/optional)
+			-> exporter_eagle_xml (contrib/optional)
+			-> exporter_kicad (contrib/optional)
+
+	group	-> pin
+			- Net
+			- Pin number
+			- Pin name
+			
+		-> footprint
+			- At least one pin is expected to be among the various graphical elements in the group
+			- `Flipped?` For simplicity, a footprint may only be on the top or the bottom
+		
+		
+	
